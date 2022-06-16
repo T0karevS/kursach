@@ -1,0 +1,169 @@
+*
+{
+    box-sizing: border-box;
+    font-family: 'Montserrat';    
+}
+body
+{
+    margin: 0px;
+    padding: 0px;
+    background-image: url("../img/svg/bg.svg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 100px;
+    
+}
+.header
+{
+    background-color: #7AD1D1;
+    height: 100px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.logo
+{
+    margin-left: 100px;
+}
+.menu p
+{
+    color: white;
+    font-size: 24px;
+    
+}
+.menu
+{
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+.search
+{
+    display: flex;
+    align-items: center;
+    margin-left: 50px;
+}
+.header__search
+{
+    height: 50px;
+    background-color: #7AD1D1;
+    border: 2px solid white;
+    outline: none;
+    width: 270px;
+    color: white;
+}
+.header__btn::before 
+{
+    content: '';
+    background-image: url(../img/svg/lupa.svg);
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 34px;
+    position: absolute;
+    top: 5px;
+    left: 7px;
+    line-height: 50px;
+}
+.header__btn
+{
+    background-color: #7AD1D1;
+    color: #fff;
+    width: 50px;
+    height: 50px;
+    margin-left: -5px;
+    padding-bottom: 7px;
+    font-size: 18px;
+    line-height: 21px;
+    color: #FFFFFF;
+    padding-left: 22px;
+    position: relative;
+    border: 2px solid white;
+}
+.header__reg
+{
+    display: flex;
+    margin-left: 100px;
+    align-items: center;
+    width: 140px;
+    justify-content: space-around;
+}
+.header__reg p,a
+{
+    color: white;
+    text-decoration: none;
+}
+.form-popup {
+    display: none;
+    bottom: 0;
+    right: 15px;
+    z-index: 9;
+    justify-content: center;
+    margin-top: 100px;
+
+}
+.form-container {
+
+    width: 800px;
+    padding: 10px 10px 25px 10px;
+    background-color: white;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0px 0px 6px 10px rgb(0 0 0/25%);
+    border-radius: 10px;
+}
+
+.form-container input {
+    width: 500px    ;
+    text-align: center;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+    border: 2px solid #7AD1D1;
+    border-radius: 10px;
+    font-size: 24px;
+}
+.registration__item
+{
+    display: flex;
+    justify-content: center;
+}
+.registration__text
+{
+    text-decoration: none;
+}
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+.form-container .btn {
+    background-color: #9CE3B1;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+    margin-bottom:10px;
+    border-radius: 30px;
+}
+
+.form-container .cancel {
+    background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+    opacity: 1;
+}
+section
+{
+    display: flex;
+    justify-content: center;
+
+}
+.profile__info
+{
+    background-color: #fff;
+    width: 800px;
+}
