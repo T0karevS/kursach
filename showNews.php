@@ -65,7 +65,6 @@ session_start();
 if( isset($_GET['category']))
 {
     $text = $_GET['category'];
-    var_dump($_GET);
     echo '<div class="where_are_we"><h1>Новости категории '.$text.'</h1></div>';
 }
 elseif (isset($_GET['search']))
