@@ -42,29 +42,50 @@ session_start();
         </form>
         <form method="get" action="showNews.php" class="search">
             <input type="text" name="search" class="header__search">
-            <button type="submit" class="header__btn"></button>
-            <div class="header__reg">
-                <?php
-                if (isset($_SESSION['user']))
-                {
-                    echo '<a href="profile.php"><img src="img/svg/user.svg" class="user_pic"></a>
-                            <p><a href="connect/logout.php">выйти</a></p>';
-                }
-                else
-                {
-                    echo '<a href="authorisation.php"><img src="img/svg/user.svg" class="user_pic"></a>
-                      <p><a href="authorisation.php">войти</a></p>';
-                }
-                ?>
-            </div>
+            <button type="submit" class="header__btn">
+            </button>
         </form>
+        <div class="header__reg">
+            <?php
+            if (isset($_SESSION['user']))
+            {
+                echo '<a href="profile.php"><img src="img/svg/user.svg" class="user_pic"></a>
+                            <p><a href="connect/logout.php">выйти</a></p>';
+            }
+            else
+            {
+                echo '<a href="authorisation.php"><img src="img/svg/user.svg" class="user_pic"></a>
+                      <p><a href="authorisation.php">войти</a></p>';
+            }
+            ?>
+        </div>
     </div>
 </header>
-<div class="where_are_we"><h1>Недавние новости</h1></div>
+<?php
+if( isset($_GET['category']))
+{
+    $text = $_GET['category'];
+    var_dump($_GET);
+    echo '<div class="where_are_we"><h1>Новости категории '.$text.'</h1></div>';
+}
+elseif (isset($_GET['search']))
+{
+    $text = $_GET['search'];
+    echo '<div class="where_are_we"><h1>Новости по запросу '.$text.'</h1></div>';
+}
+?>
+
 <div class="news-block">
     <?php
     require_once 'connect/getNews.php';
-    $news = getNews();
+    if( isset($_GET['category']))
+    {
+        $news = getNews5();
+    }
+    elseif (isset($_GET['search']))
+    {
+        $news= getNews6();
+    }
     foreach (array_reverse($news) as $post ):
         ?>
         <form method="GET" target="_blank"   class="form__news" action="newspage.php">
@@ -85,7 +106,5 @@ session_start();
     <?php
     endforeach;
     ?>
-</div>
-<script src="js/ajax.js"></script>
 </body>
 </html>

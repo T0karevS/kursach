@@ -8,8 +8,7 @@ session_start();
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 </head>
 <body>
@@ -60,32 +59,30 @@ session_start();
         </form>
     </div>
 </header>
-<div class="where_are_we"><h1>Недавние новости</h1></div>
-<div class="news-block">
-    <?php
-    require_once 'connect/getNews.php';
-    $news = getNews();
-    foreach (array_reverse($news) as $post ):
+<div class="form-reg" id="myForm">
+    <form action="connect/uploadnews.php" class="form-container-news" method="post" enctype="multipart/form-data">
+        <h2 class="news-h">Добавить статью</h2>
+        <input type="text" class="news__title" name="title" placeholder="заголовок статьи">
+        <input type="file" class="news__input" name="picture">
+        <textarea type="text" class="news__text" name="text" placeholder="Текст статьи"></textarea>
+        <p><select size="1"  name="category">
+                <option disabled>Категории</option>
+                <option value="Web">Web</option>
+                <option value="Tech">Технологии</option>
+                <option value="Design">Дизайн</option>
+                <option value="Managment">Менеджмент</option>
+                <option value="other">Другое</option>
+            </select></p>
+        <p>
+        <button type="submit" class="news-btn">Разместить статью</button>
+        <?php
+        if(isset($_SESSION['message1'])){
+        echo '<p class="msg">' . $_SESSION['message1'] . '</p>';
+        unset($_SESSION['message1']);
+        }
         ?>
-        <form method="GET" target="_blank"   class="form__news" action="newspage.php">
-            <input type="hidden" name="id" value="<?=$post['id']?>">
-            <div class="block__news">
-                <div class="news__info">
-                    <button class="button__news" type="submit" >
-                        <h2 class="post_title"><?= $post['title']?></h2>
-                    </button>
-                    <p class="post__category">Категория: <?= $post['category']?></p>
-                    <p class="post__text" ><?= $post['text'] ?></p>
-                    <p class="post__author" > <?= $post['author'] ?> </p>
-                    <p class="post__time"><?= $post['vremya']?></p>
-                </div>
-                <img class="news-img" src="<?= $post['picture']?>">
-            </div>
-        </form>
-    <?php
-    endforeach;
-    ?>
+    </form>
 </div>
-<script src="js/ajax.js"></script>
+
 </body>
 </html>

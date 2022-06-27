@@ -57,35 +57,38 @@ session_start();
                 }
                 ?>
             </div>
-        </form>
     </div>
 </header>
-<div class="where_are_we"><h1>Недавние новости</h1></div>
-<div class="news-block">
+
+<div class="newspage-block">
     <?php
     require_once 'connect/getNews.php';
-    $news = getNews();
+    if (isset($_GET['id']))
+    {
+        $news = getNews2();
+    }
+    elseif( isset($_GET['category']))
+    {
+        $news = getNews5();
+    }
+    elseif (isset($_GET['search']))
+    {
+        $news= getNews6();
+    }
     foreach (array_reverse($news) as $post ):
         ?>
-        <form method="GET" target="_blank"   class="form__news" action="newspage.php">
-            <input type="hidden" name="id" value="<?=$post['id']?>">
-            <div class="block__news">
-                <div class="news__info">
-                    <button class="button__news" type="submit" >
-                        <h2 class="post_title"><?= $post['title']?></h2>
-                    </button>
-                    <p class="post__category">Категория: <?= $post['category']?></p>
-                    <p class="post__text" ><?= $post['text'] ?></p>
-                    <p class="post__author" > <?= $post['author'] ?> </p>
-                    <p class="post__time"><?= $post['vremya']?></p>
-                </div>
-                <img class="news-img" src="<?= $post['picture']?>">
-            </div>
-        </form>
+        <div class="div__news">
+               <div class="news__stuff">
+                   <h2 class="search__text"><?= $post['title']?></h2>
+                   <p class="search__text2" >Автор: <?= $post['author'] ?></p>
+                   <p class="search__text2" ><?= $post['text'] ?></p>
+               </div>
+                    <img class="news-img" src="<?= $post['picture']?>" >
+           </div>
     <?php
     endforeach;
     ?>
 </div>
-<script src="js/ajax.js"></script>
+</div>
 </body>
 </html>

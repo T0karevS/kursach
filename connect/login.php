@@ -14,7 +14,8 @@ if (mysqli_num_rows($check_user) == 0) {
         "nickname" => $user['nickname'],
         "password" => $user['password'],
         "email" => $user['email'],
-        "status" => $user['status']
+        "status" => $user['status'],
+        "picture" => $user['picture']
     ];
     header('location: ../index.php');
     var_dump($user);

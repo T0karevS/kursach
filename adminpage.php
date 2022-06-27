@@ -60,32 +60,66 @@ session_start();
         </form>
     </div>
 </header>
-<div class="where_are_we"><h1>Недавние новости</h1></div>
+
+
+<form method="post" class="form" enctype="multipart/form-data">
 <div class="news-block">
     <?php
     require_once 'connect/getNews.php';
-    $news = getNews();
+    $news = getNews3();
     foreach (array_reverse($news) as $post ):
         ?>
-        <form method="GET" target="_blank"   class="form__news" action="newspage.php">
-            <input type="hidden" name="id" value="<?=$post['id']?>">
-            <div class="block__news">
-                <div class="news__info">
-                    <button class="button__news" type="submit" >
-                        <h2 class="post_title"><?= $post['title']?></h2>
-                    </button>
-                    <p class="post__category">Категория: <?= $post['category']?></p>
-                    <p class="post__text" ><?= $post['text'] ?></p>
-                    <p class="post__author" > <?= $post['author'] ?> </p>
-                    <p class="post__time"><?= $post['vremya']?></p>
-                </div>
-                <img class="news-img" src="<?= $post['picture']?>">
-            </div>
-        </form>
+    <form method="post"  enctype="multipart/form-data">
+    <div class="block__news">
+        <div class="news__info">
+            <button class="button__news" type="submit" >
+                <h2 class="post_title"><?= $post['title']?></h2>
+            </button>
+            <p class="post__category">Категория: <?= $post['category']?></p>
+            <p class="post__text" ><?= $post['text'] ?></p>
+            <p class="post__author" > <?= $post['author'] ?> </p>
+            <p class="post__time"><?= $post['vremya']?></p>
+        </div>
+        <img class="news-img" src="<?= $post['picture']?>">
+
+                <?php
+
+                $id=$post['id'];
+                $id2='a'.$id;
+                if( isset($_POST[ $id ]) )
+                {
+                    $pdo = new PDO("mysql:host = localhost;dbname=news", "root", "root");
+                    $sql = "DELETE from `news` WHERE `id`='$id' ";
+                    $statement = $pdo->prepare($sql);
+                    $statement->execute();
+                }
+                if( isset($_POST[ $id2 ]) )
+                {
+                    $pdo = new PDO("mysql:host = localhost;dbname=news", "root", "root");
+                    $sql = "UPDATE `news` SET `status`='A' WHERE `id`='$id' ";
+                    $statement = $pdo->prepare($sql);
+                    $statement->execute();
+                }
+                ?>
+        <div class="dve_knopki">
+            <button type="submit" class="button1" name="<?= $post['id']; ?>">Забанить cтатью</button>
+            <button type="submit" class="button1" name="<?=  'a'.$post['id']; ?>">Выложить статью</button>
+        </div>
+    </div>
+
     <?php
     endforeach;
     ?>
 </div>
+
+</form>
+<script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+</script>
 <script src="js/ajax.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
 </body>
 </html>
