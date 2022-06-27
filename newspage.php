@@ -77,12 +77,14 @@ session_start();
     }
     foreach (array_reverse($news) as $post ):
         ?>
-        <div class="div__news">
+        <div class="div__news" style="width: 1250px">
                <div class="news__stuff">
                    <h2 class="search__text"><?= $post['title']?></h2>
-                   <p class="search__text2" >Автор: <?= $post['author'] ?></p>
+
                    <p class="search__text2" ><?= $post['text'] ?></p>
-               </div>
+                   <div><p class="post__author" > <?= $post['author'] ?> </p>
+                   <p class="post__time"><?= $post['vremya']?></p>
+                   </div></div>
                     <img class="news-img" src="<?= $post['picture']?>" >
            </div>
     <?php
